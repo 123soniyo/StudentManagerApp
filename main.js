@@ -13,7 +13,7 @@ function saveToCloud(event){
         phoneno
     }
 
-    axios.post('https://crudcrud.com/api/49b75f701e1f4361a4171c74751acc65/AppointmentData',obj)
+    axios.post('https://crudcrud.com/api/49b75f701e1f4361a4171c74751acc65/studentData',obj)
         .then((res)=>{
             showUserOnScreen(res.data)
             console.log(res)
@@ -29,7 +29,7 @@ function saveToCloud(event){
 // Retrieving Data From CRUD/CRUD
 
 window.addEventListener('DOMContentLoaded',()=>{
-    axios.get('https://crudcrud.com/api/49b75f701e1f4361a4171c74751acc65/AppointmentData')
+    axios.get('https://crudcrud.com/api/49b75f701e1f4361a4171c74751acc65/studentData')
     .then((response)=>{
         console.log(response)
 
@@ -74,12 +74,19 @@ function showUserOnScreen(obj){
     }
 
     deletebutton.onclick= ()=>{
-        axios.delete(`https://crudcrud.com/api/49b75f701e1f4361a4171c74751acc65/AppointmentData/${obj._id}`)
-        .then(()=>{
-            parentele.removeChild(childele)
-        })
-    
-        .catch(err => console.log(err))
+        const userId = obj._id;
+        deleteUser(userId,userRow);
+        
     }
 }
+
+funtion deleteUser(userId,userRow){
+    axios.delete(`https://crudcrud.com/api/49b75f701e1f4361a4171c74751acc65/studentData/${obj._id}`)
+    .then(()=>{
+        console.log("deleted successfully")
+        userRow.remove();
+    })
+    .catch((err)=> console.log(err))'
+}
+        
 
